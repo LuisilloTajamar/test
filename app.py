@@ -22,7 +22,7 @@ preguntas = [
     {
         "texto": "¿por que luis le gusta la wii?",
         "opciones": ["porque es original", "porque es entretenida", "porque es un clasico", "porque si"],
-        "correcta": "porque es un calsico"
+        "correcta": "porque es un clasico"
     },
     {
         "texto": "¿cuantos lingotes de oro encontro la UCO en la finca de abalos?",
@@ -89,14 +89,18 @@ if boton_enviar:
             aciertos = aciertos + 1
 
     # Calculamos la nota sobre 10
-    nota = (aciertos / total) * 10
+    nota = round((aciertos / total) * 10,2)
 
     # Mostramos el resultado con colores
     st.divider()
     st.header(f"Resultado final: {nota} / 10")
 
-    if nota >= 5:
-        st.success(f"¡Felicidades! Has aprobado con {aciertos} aciertos.")
-        st.balloons() # ¡Efecto de globos!
-    else:
-        st.error(f"Has sacado un {nota}. ¡Toca estudiar un poco más!")
+    if nota <= 2:
+        st.success(f"Has suspendido con {aciertos} aciertos.")
+    elif 3 <= nota <= 6:
+        st.error(f"has sacado {aciertos} muy mal, a estudiar")
+    elif 7 <= nota <= 9:
+        st.warning(f"has aprobado con {aciertos}, asi si hombre")
+    elif nota == 10:
+        st.success(f"¡Eres un genio!")
+        st.balloons()
